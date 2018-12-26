@@ -5,7 +5,6 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
 
@@ -131,7 +130,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void callSingleKeyValue(String URL) {
-        Service.url(URL).method("GET").param("token", "12d2sd21").request().execute(mContext, new RequestCallback() {
+        Service.url(URL).method("GET").header("token", "12d2sd21").request().execute(mContext, new RequestCallback() {
             @Override
             public void onSuccess(Response response) {
                 Toast.makeText(mContext, response.getResponse(), Toast.LENGTH_SHORT).show();
@@ -146,7 +145,7 @@ public class MainActivity extends AppCompatActivity{
     private void callMultipleKeyValue(String URL) {
         String[] paramKeys = {"token", "id"};
         String[] paramValues = {"454adasdsd", "1"};
-        Service.url(URL).method("GET").params(paramKeys, paramValues).request().execute(mContext, new RequestCallback() {
+        Service.url(URL).method("GET").headers(paramKeys, paramValues).request().execute(mContext, new RequestCallback() {
             @Override
             public void onSuccess(Response response) {
                 Toast.makeText(mContext, response.getResponse(), Toast.LENGTH_SHORT).show();
@@ -172,7 +171,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void callWithJsonBodyAndSingleKeyValue(String URL) {
-        Service.url(URL).method("PUT").param("token", "ds454s5d4s").json("{\"name\":\"Nabil\"}").request().execute(mContext, new RequestCallback() {
+        Service.url(URL).method("PUT").header("token", "ds454s5d4s").json("{\"name\":\"Nabil\"}").request().execute(mContext, new RequestCallback() {
             @Override
             public void onSuccess(Response response) {
                 String header = response.getHeaders().get("anisha");
@@ -189,7 +188,7 @@ public class MainActivity extends AppCompatActivity{
     private void callWithJsonBodyAndMultipleKeyValue(String URL) {
         String[] paramKeys = {"token", "id"};
         String[] paramValues = {"454adasdsd", "1"};
-        Service.url(URL).method("DELETE").params(paramKeys, paramValues).json("{\"name\":\"Nabil\"}").request().execute(mContext, new RequestCallback() {
+        Service.url(URL).method("DELETE").headers(paramKeys, paramValues).json("{\"name\":\"Nabil\"}").request().execute(mContext, new RequestCallback() {
             @Override
             public void onSuccess(Response response) {
                 String header = response.getHeaders().get("anisha");

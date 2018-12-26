@@ -1,7 +1,5 @@
 package com.mjm.webservices;
 
-import java.io.File;
-
 /**
  * Created by nabilulaleem.md on 23-05-2018.
  */
@@ -9,17 +7,17 @@ public class RequestMethod {
     private String url;
     private String method;
 
-    public RequestMethod(String url, String method){
+    RequestMethod(String url, String method){
         this.url = url;
         this.method = method;
     }
 
-    public RequestParam param(String key, String value){
-        return new RequestParam(url, method, key, value);
+    public RequestHeader header(String key, String value){
+        return new RequestHeader(url, method, key, value);
     }
 
-    public RequestParams params(String[] keys, String[] values){
-        return new RequestParams(url, method, keys, values);
+    public RequestHeaders headers(String[] keys, String[] values){
+        return new RequestHeaders(url, method, keys, values);
     }
 
     public RequestFile file(String[] filePath){

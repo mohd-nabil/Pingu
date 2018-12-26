@@ -24,18 +24,14 @@ public class ServiceCall {
     private static final String TAG = "ServiceCall";
     public static final String status = "999";
 
-    public static final String UNAUTHORISED_ACCESS = "Unauthorised access, please login again.";
-    public static final String BAD_REQUEST = "Request not available";
-    public static final String INTERNAL_SERVER_ERROR = "Internal server error, please try again.";
-    public static final String UNEXPECTED_ERROR = "Unexpected error occurred";
+    static final String UNAUTHORISED_ACCESS = "Unauthorised access, please login again.";
+    static final String BAD_REQUEST = "Request not available";
+    static final String INTERNAL_SERVER_ERROR = "Internal server error, please try again.";
+    static final String UNEXPECTED_ERROR = "Unexpected error occurred";
 
     private static final String MSG = "msg";
     private static final String STATUS = "status";
 
-    public static final String GET = "GET";
-    public static final String POST = "POST";
-    public static final String PUT = "PUT";
-    public static final String DELETE = "DELETE";
     private static final String FILE_NOT_FOUND = "File not found";
     private static final String PERMISSION_DENIED = "Permission denied, please add uses permissions";
 
@@ -45,18 +41,18 @@ public class ServiceCall {
 
     private static HttpURLConnection conn;
 
-    public ServiceCall(){}
+    ServiceCall(){}
 
-    public ServiceCall(String contentType){
+    ServiceCall(String contentType){
         ServiceCall.contentType = contentType;
     }
 
-    public ServiceCall(int readTimeout, int connectTimeout){
+    ServiceCall(int readTimeout, int connectTimeout){
         ServiceCall.readTimeout = readTimeout;
         ServiceCall.connectTimeout = connectTimeout;
     }
 
-    public ServiceCall(int readTimeout, int connectTimeout, String contentType){
+    ServiceCall(int readTimeout, int connectTimeout, String contentType){
         ServiceCall.readTimeout = readTimeout;
         ServiceCall.connectTimeout = connectTimeout;
         ServiceCall.contentType = contentType;
@@ -71,7 +67,7 @@ public class ServiceCall {
     }
 
     private void setupGetProperties() throws ProtocolException {
-        conn.setRequestMethod(GET);
+        conn.setRequestMethod(Methods.GET());
         conn.setRequestProperty("User-Agent", "Mozilla/5.0");
     }
 
@@ -100,7 +96,7 @@ public class ServiceCall {
         conn.setRequestMethod(method);
     }
 
-    public Response initializeGetClient(String URL, String paramsKey, String paramsValue, String[] paramsKeys, String[] paramsValues) throws IOException {
+    Response initializeGetClient(String URL, String paramsKey, String paramsValue, String[] paramsKeys, String[] paramsValues) throws IOException {
         initializeConnection(URL);
         setupGetProperties();
         if(paramsKey != null && paramsValue != null) {
@@ -112,9 +108,9 @@ public class ServiceCall {
         return getResponse(conn);
     }
 
-    public Response initializePostClient(String URL, String jsonBody, String paramsKey, String paramsValue,  String[] paramsKeys, String[] paramsValues) throws IOException {
+    Response initializePostClient(String URL, String jsonBody, String paramsKey, String paramsValue,  String[] paramsKeys, String[] paramsValues) throws IOException {
         initializeConnection(URL);
-        setupProperties(POST);
+        setupProperties(Methods.POST());
         if(paramsKey != null && paramsValue != null) {
             conn = setParamsAndValues(conn, paramsKey, paramsValue);
         }
@@ -127,9 +123,9 @@ public class ServiceCall {
         return getResponse(conn);
     }
 
-    public Response initializePutClient(String URL, String jsonBody, String paramsKey, String paramsValue, String[] paramsKeys, String[] paramsValues) throws IOException {
+    Response initializePutClient(String URL, String jsonBody, String paramsKey, String paramsValue, String[] paramsKeys, String[] paramsValues) throws IOException {
         initializeConnection(URL);
-        setupProperties(PUT);
+        setupProperties(Methods.PUT());
         if(paramsKey != null && paramsValue != null) {
             conn = setParamsAndValues(conn, paramsKey, paramsValue);
         }
@@ -142,7 +138,7 @@ public class ServiceCall {
         return getResponse(conn);
     }
 
-    public Response initializeDeleteClient(String URL, String jsonBody, String paramsKey, String paramsValue, String[] paramsKeys, String[] paramsValues) throws IOException {
+    Response initializeDeleteClient(String URL, String jsonBody, String paramsKey, String paramsValue, String[] paramsKeys, String[] paramsValues) throws IOException {
 //        initializeConnection(URL);
 //        setupDeleteProperties(DELETE);
 //        if(paramsKey != null && paramsValue != null) {
@@ -159,9 +155,9 @@ public class ServiceCall {
         return response;
     }
 
-    public Response initializeMultipart(String URL, String paramKey, String paramValue, String[] paramKeys, String[] paramValues, String[] filePath) throws IOException {
+    Response initializeMultipart(String URL, String paramKey, String paramValue, String[] paramKeys, String[] paramValues, String[] filePath) throws IOException {
         initializeConnection(URL);
-        setupMultipartProperties(POST);
+        setupMultipartProperties(Methods.POST());
         AndroidMultiPartEntity entity = new AndroidMultiPartEntity(
                 new AndroidMultiPartEntity.ProgressListener() {
                     @Override

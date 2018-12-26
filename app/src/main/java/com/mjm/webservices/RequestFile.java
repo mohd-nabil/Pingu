@@ -13,13 +13,13 @@ public class RequestFile {
     private String[] values;
     private String[] filePath;
 
-    public RequestFile(String url, String method, String[] filePath) {
+    RequestFile(String url, String method, String[] filePath) {
         this.url = url;
         this.method = method;
         this.filePath = filePath;
     }
 
-    public RequestFile(String url, String method, String key, String value, String[] filePath) {
+    RequestFile(String url, String method, String key, String value, String[] filePath) {
         this.url = url;
         this.method = method;
         this.key = key;
@@ -27,7 +27,7 @@ public class RequestFile {
         this.filePath = filePath;
     }
 
-    public RequestFile(String url, String method, String[] keys, String[] values, String[] filePath) {
+    RequestFile(String url, String method, String[] keys, String[] values, String[] filePath) {
         this.url = url;
         this.method = method;
         this.keys = keys;

@@ -29,7 +29,7 @@ public class Request {
     private String contentType;
 
 
-    public Request(String url, String method, String key, String value, String[] keys, String[] values, String jsonBody) {
+    Request(String url, String method, String key, String value, String[] keys, String[] values, String jsonBody) {
         this.url = url;
         this.method = method;
         this.key = key;
@@ -39,31 +39,31 @@ public class Request {
         this.jsonBody = jsonBody;
     }
 
-    public Request(String url, String method, String key, String value) {
+     Request(String url, String method, String key, String value) {
         this.url = url;
         this.method = method;
         this.key = key;
         this.value = value;
     }
 
-    public Request(String url, String method, String[] keys, String[] values) {
+     Request(String url, String method, String[] keys, String[] values) {
         this.url = url;
         this.method = method;
         this.keys = keys;
         this.values = values;
     }
 
-    public Request(String url, String method) {
+     Request(String url, String method) {
         this.url = url;
         this.method = method;
     }
 
-    public void setTimeout(int readTimeout, int connectionTimeout) {
+     void setTimeout(int readTimeout, int connectionTimeout) {
         this.readTimeout = readTimeout;
         this.connectionTimeout = connectionTimeout;
     }
 
-    public void setTimeout(int readTimeout, int connectionTimeout, String contentType) {
+     void setTimeout(int readTimeout, int connectionTimeout, String contentType) {
         this.readTimeout = readTimeout;
         this.connectionTimeout = connectionTimeout;
         this.contentType = contentType;
@@ -79,7 +79,7 @@ public class Request {
         }
     }
 
-    public void execute(Context context, int connectivityType, RequestCallback requestCallback){
+     public void execute(Context context, int connectivityType, RequestCallback requestCallback){
         this.mContext = context;
         this.requestCallback = requestCallback;
 
@@ -115,13 +115,13 @@ public class Request {
                     serviceCall = new ServiceCall(contentType);
                 }
 
-                if(method.toUpperCase().equals(ServiceCall.GET)){
+                if(method.toUpperCase().equals(Methods.GET())){
                     response = serviceCall.initializeGetClient(url, key, value, keys, values);
-                }else if(method.toUpperCase().equals(ServiceCall.POST)){
+                }else if(method.toUpperCase().equals(Methods.POST())){
                     response = serviceCall.initializePostClient(url, jsonBody, key, value, keys, values);
-                }else if(method.toUpperCase().equals(ServiceCall.DELETE)){
+                }else if(method.toUpperCase().equals(Methods.DELETE())){
                     response = serviceCall.initializeDeleteClient(url, jsonBody, key, value, keys, values);
-                }else if(method.toUpperCase().equals(ServiceCall.PUT)){
+                }else if(method.toUpperCase().equals(Methods.PUT())){
                     response = serviceCall.initializePutClient(url, jsonBody, key, value, keys, values);
                 }
             }catch (Exception e){

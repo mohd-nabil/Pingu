@@ -97,17 +97,17 @@ public class RequestMultipart {
                     serviceCall = new ServiceCall(contentType);
                 }
 
-                if(method.toUpperCase().equals(ServiceCall.POST)){
+                if(method.toUpperCase().equals(Methods.POST())){
                     response = serviceCall.initializeMultipart(url, key, value, keys, values, filePath);
                 }else {
                     response = new Response();
                     response.setResponseCode(-1);
                     response.setResponseMessage("Not allowed");
-                    if (method.toUpperCase().equals(ServiceCall.GET)) {
+                    if (method.toUpperCase().equals(Methods.GET())) {
                         response.setResponse("GET method not supported");
-                    } else if (method.toUpperCase().equals(ServiceCall.DELETE)) {
+                    } else if (method.toUpperCase().equals(Methods.DELETE())) {
                         response.setResponse("DELETE method not supported");
-                    } else if (method.toUpperCase().equals(ServiceCall.PUT)) {
+                    } else if (method.toUpperCase().equals(Methods.PUT())) {
                         response.setResponse("PUT method not supported");
                     }
                 }

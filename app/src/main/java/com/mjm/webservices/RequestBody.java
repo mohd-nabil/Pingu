@@ -12,7 +12,7 @@ public class RequestBody {
     private String[] values;
     private String jsonBody;
 
-    public RequestBody(String url, String method, String key, String value, String jsonBody){
+    RequestBody(String url, String method, String key, String value, String jsonBody){
         this.url = url;
         this.method = method;
         this.key = key;
@@ -20,7 +20,7 @@ public class RequestBody {
         this.jsonBody = jsonBody;
     }
 
-    public RequestBody(String url, String method, String[] keys, String[] values, String jsonBody){
+    RequestBody(String url, String method, String[] keys, String[] values, String jsonBody){
         this.url = url;
         this.method = method;
         this.keys = keys;
@@ -28,7 +28,7 @@ public class RequestBody {
         this.jsonBody = jsonBody;
     }
 
-    public RequestBody(String url, String method, String jsonBody) {
+    RequestBody(String url, String method, String jsonBody) {
         this.url = url;
         this.method = method;
         this.jsonBody = jsonBody;

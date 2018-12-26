@@ -3,13 +3,13 @@ package com.mjm.webservices;
 /**
  * Created by nabilulaleem.md on 23-05-2018.
  */
-public class RequestParams {
+public class RequestHeaders {
     private String url;
     private String method;
     private String[] keys;
     private String[] values;
 
-    public RequestParams(String url, String method, String[] keys, String[] values){
+    RequestHeaders(String url, String method, String[] keys, String[] values){
         this.url = url;
         this.method = method;
         this.keys = keys;
