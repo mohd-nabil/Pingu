@@ -17,6 +17,18 @@ public class RequestHeader {
         this.value = value;
     }
 
+    public RequestFile file(String[] filePath){
+        return new RequestFile(url, method, filePath);
+    }
+
+    public RequestFile file(String key, String value, String[] filePath){
+        return new RequestFile(url, method, key, value, filePath);
+    }
+
+    public RequestFile file(String[] keys, String[] values, String[] filePath){
+        return new RequestFile(url, method, keys, values, filePath);
+    }
+
     public RequestBody json(String jsonBody){
         return new RequestBody(url, method, key, value, jsonBody);
     }
