@@ -155,21 +155,29 @@ public class ServiceCall {
         return response;
     }
 
-    Response initializeMultipart(String URL, String paramKey, String paramValue, String[] paramKeys, String[] paramValues, String[] filePath) throws IOException {
+    Response initializeMultipart(String URL, String headerKey, String headerValue, String[] headerKeys, String[] headerValues, String key, String value, String[] keys, String[] values, String[] filePath) throws IOException {
         initializeConnection(URL);
         setupMultipartProperties(Methods.POST());
+        if(headerKey != null && headerValue != null) {
+            conn = setParamsAndValues(conn, headerKey, headerValue);
+        }
+
+        if(headerKeys != null && headerValues != null) {
+            conn = setParamsAndValues(conn, headerKeys, headerValues);
+        }
+
         AndroidMultiPartEntity entity = new AndroidMultiPartEntity(
                 new AndroidMultiPartEntity.ProgressListener() {
                     @Override
                     public void transferred(long num) {
                     }
                 });
-        if(paramKey != null && paramValue != null){
-            entity = setParamsAndValues(entity, paramKey, paramValue);
+        if(key != null && value != null){
+            entity = setParamsAndValues(entity, key, value);
         }
 
-        if(paramKeys != null && paramValues != null){
-            entity = setParamsAndValues(entity, paramKeys, paramValues);
+        if(keys != null && values != null){
+            entity = setParamsAndValues(entity, keys, values);
         }
 
         if(filePath != null){

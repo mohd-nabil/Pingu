@@ -18,6 +18,10 @@ public class RequestMultipart {
 
     private String url;
     private String method;
+    private String headerKey;
+    private String headerValue;
+    private String[] headerKeys;
+    private String[] headerValues;
     private String key;
     private String value;
     private String[] keys;
@@ -31,9 +35,13 @@ public class RequestMultipart {
     private Context mContext;
     private RequestCallback requestCallback;
 
-    public RequestMultipart(String url, String method, String key, String value, String[] keys, String[] values, String[] filePath){
+    RequestMultipart(String url, String method, String headerKey, String headerValue, String[] headerKeys, String[] headerValues, String key, String value, String[] keys, String[] values, String[] filePath){
         this.url = url;
         this.method = method;
+        this.headerKey = headerKey;
+        this.headerValue = headerValue;
+        this.headerKeys = headerKeys;
+        this.headerValues = headerValues;
         this.key = key;
         this.value = value;
         this.keys = keys;
@@ -41,12 +49,12 @@ public class RequestMultipart {
         this.filePath = filePath;
     }
 
-    public void setTimeout(int readTimeout, int connectionTimeout) {
+    void setTimeout(int readTimeout, int connectionTimeout) {
         this.readTimeout = readTimeout;
         this.connectionTimeout = connectionTimeout;
     }
 
-    public void setTimeout(int readTimeout, int connectionTimeout, String contentType) {
+    void setTimeout(int readTimeout, int connectionTimeout, String contentType) {
         this.readTimeout = readTimeout;
         this.connectionTimeout = connectionTimeout;
         this.contentType = contentType;
@@ -98,7 +106,7 @@ public class RequestMultipart {
                 }
 
                 if(method.toUpperCase().equals(Methods.POST())){
-                    response = serviceCall.initializeMultipart(url, key, value, keys, values, filePath);
+                    response = serviceCall.initializeMultipart(url, headerKey, headerValue, headerKeys, headerValues, key, value, keys, values, filePath);
                 }else {
                     response = new Response();
                     response.setResponseCode(-1);
