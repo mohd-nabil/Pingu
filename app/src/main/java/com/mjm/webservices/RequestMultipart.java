@@ -4,6 +4,8 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 
+import org.apache.http.entity.mime.content.StringBody;
+
 import java.io.File;
 
 /**
@@ -22,6 +24,8 @@ public class RequestMultipart {
     private String headerValue;
     private String[] headerKeys;
     private String[] headerValues;
+    private String bodyKey;
+    private StringBody stringBody;
     private String key;
     private String value;
     private String[] keys;
@@ -35,7 +39,7 @@ public class RequestMultipart {
     private Context mContext;
     private RequestCallback requestCallback;
 
-    RequestMultipart(String url, String method, String headerKey, String headerValue, String[] headerKeys, String[] headerValues, String key, String value, String[] keys, String[] values, String[] filePath){
+    RequestMultipart(String url, String method, String headerKey, String headerValue, String[] headerKeys, String[] headerValues, String key, String value, String[] keys, String[] values, String bodyKey, StringBody stringBody, String[] filePath){
         this.url = url;
         this.method = method;
         this.headerKey = headerKey;
@@ -46,6 +50,8 @@ public class RequestMultipart {
         this.value = value;
         this.keys = keys;
         this.values = values;
+        this.bodyKey = bodyKey;
+        this.stringBody = stringBody;
         this.filePath = filePath;
     }
 
@@ -106,7 +112,7 @@ public class RequestMultipart {
                 }
 
                 if(method.toUpperCase().equals(Methods.POST())){
-                    response = serviceCall.initializeMultipart(url, headerKey, headerValue, headerKeys, headerValues, key, value, keys, values, filePath);
+                    response = serviceCall.initializeMultipart(url, headerKey, headerValue, headerKeys, headerValues, key, value, keys, values, bodyKey, stringBody, filePath);
                 }else {
                     response = new Response();
                     response.setResponseCode(-1);

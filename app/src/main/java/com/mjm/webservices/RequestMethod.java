@@ -1,5 +1,7 @@
 package com.mjm.webservices;
 
+import org.apache.http.entity.mime.content.StringBody;
+
 /**
  * Created by nabilulaleem.md on 23-05-2018.
  */
@@ -20,16 +22,26 @@ public class RequestMethod {
         return new RequestHeaders(url, method, keys, values);
     }
 
-    public RequestFile file(String[] filePath){
-        return new RequestFile(url, method, filePath);
-    }
-
     public RequestFile file(String key, String value, String[] filePath){
         return new RequestFile(url, method, key, value, filePath);
     }
-
     public RequestFile file(String[] keys, String[] values, String[] filePath){
         return new RequestFile(url, method, keys, values, filePath);
+    }
+
+    public RequestFile file(String key, String value, String bodyKey, StringBody stringBody, String[] filePath){
+        return new RequestFile(url, method, key, value, bodyKey, stringBody, filePath);
+    }
+    public RequestFile file(String[] keys, String[] values, String bodyKey, StringBody stringBody, String[] filePath){
+        return new RequestFile(url, method, keys, values, bodyKey, stringBody, filePath);
+    }
+
+    public RequestFile file(String bodyKey, StringBody stringBody, String[] filePath){
+        return new RequestFile(url, method, bodyKey, stringBody, filePath);
+    }
+
+    public RequestFile file(String[] filePath){
+        return new RequestFile(url, method, filePath);
     }
 
     public RequestBody json(String jsonBody){
@@ -51,4 +63,6 @@ public class RequestMethod {
         request.setTimeout(readTimeout, connectionTimeout, contentType);
         return request;
     }
+
+
 }

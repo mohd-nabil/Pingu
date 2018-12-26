@@ -2,6 +2,8 @@ package com.mjm.webservices;
 
 import android.util.Log;
 
+import org.apache.http.entity.mime.FormBodyPart;
+import org.apache.http.entity.mime.content.ContentBody;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 
@@ -17,6 +19,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.FormBody;
 import okhttp3.Headers;
 
 public class ServiceCall {
@@ -155,7 +158,7 @@ public class ServiceCall {
         return response;
     }
 
-    Response initializeMultipart(String URL, String headerKey, String headerValue, String[] headerKeys, String[] headerValues, String key, String value, String[] keys, String[] values, String[] filePath) throws IOException {
+    Response initializeMultipart(String URL, String headerKey, String headerValue, String[] headerKeys, String[] headerValues, String key, String value, String[] keys, String[] values, String bodyKey, StringBody stringBody, String[] filePath) throws IOException {
         initializeConnection(URL);
         setupMultipartProperties(Methods.POST());
         if(headerKey != null && headerValue != null) {
@@ -180,6 +183,10 @@ public class ServiceCall {
             entity = setParamsAndValues(entity, keys, values);
         }
 
+        if(bodyKey != null && stringBody != null){
+            entity = setFormBody(entity, bodyKey, stringBody);
+        }
+
         if(filePath != null){
             entity = setFileBody(entity, filePath);
         }
@@ -191,6 +198,12 @@ public class ServiceCall {
         }catch (SecurityException se){
             return new Response(-1, PERMISSION_DENIED, PERMISSION_DENIED);
         }
+    }
+
+    private AndroidMultiPartEntity setFormBody(AndroidMultiPartEntity entity, String bodyKey, StringBody stringBody) {
+        FormBodyPart formBodyPart = new FormBodyPart(bodyKey, stringBody);
+        entity.addPart(formBodyPart);
+        return entity;
     }
 
     private AndroidMultiPartEntity setFileBody(AndroidMultiPartEntity entity, String[] filePathArr) throws FileNotFoundException{
