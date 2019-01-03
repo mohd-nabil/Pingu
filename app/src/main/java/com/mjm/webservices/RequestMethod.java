@@ -22,26 +22,26 @@ public class RequestMethod {
         return new RequestHeaders(url, method, keys, values);
     }
 
-    public RequestFile file(String key, String value, String[] filePath){
-        return new RequestFile(url, method, key, value, filePath);
+    public RequestFile file(String key, String value, String[] filePathKeys, String[] filePathValues){
+        return new RequestFile(url, method, key, value, filePathKeys, filePathValues);
     }
-    public RequestFile file(String[] keys, String[] values, String[] filePath){
-        return new RequestFile(url, method, keys, values, filePath);
-    }
-
-    public RequestFile file(String key, String value, String bodyKey, StringBody stringBody, String[] filePath){
-        return new RequestFile(url, method, key, value, bodyKey, stringBody, filePath);
-    }
-    public RequestFile file(String[] keys, String[] values, String bodyKey, StringBody stringBody, String[] filePath){
-        return new RequestFile(url, method, keys, values, bodyKey, stringBody, filePath);
+    public RequestFile file(String[] keys, String[] values, String[] filePathKeys, String[] filePathValues){
+        return new RequestFile(url, method, keys, values, filePathKeys, filePathValues);
     }
 
-    public RequestFile file(String bodyKey, StringBody stringBody, String[] filePath){
-        return new RequestFile(url, method, bodyKey, stringBody, filePath);
+    public RequestFile file(String key, String value, String bodyKey, StringBody stringBody, String[] filePathKeys, String[] filePathValues){
+        return new RequestFile(url, method, key, value, bodyKey, stringBody, filePathKeys, filePathValues);
+    }
+    public RequestFile file(String[] keys, String[] values, String bodyKey, StringBody stringBody, String[] filePathKeys, String[] filePathValues){
+        return new RequestFile(url, method, keys, values, bodyKey, stringBody, filePathKeys, filePathValues);
     }
 
-    public RequestFile file(String[] filePath){
-        return new RequestFile(url, method, filePath);
+    public RequestFile file(String bodyKey, StringBody stringBody, String[] filePathKeys, String[] filePathValues){
+        return new RequestFile(url, method, bodyKey, stringBody, filePathKeys, filePathValues);
+    }
+
+    public RequestFile file(String[] filePathKeys, String[] filePathValues){
+        return new RequestFile(url, method, filePathKeys, filePathValues);
     }
 
     public RequestBody json(String jsonBody){

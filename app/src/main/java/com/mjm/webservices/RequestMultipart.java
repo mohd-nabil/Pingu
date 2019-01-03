@@ -30,7 +30,8 @@ public class RequestMultipart {
     private String value;
     private String[] keys;
     private String[] values;
-    private String[] filePath;
+    private String[] filePathKeys;
+    private String[] filePathValues;
 
     private int readTimeout;
     private int connectionTimeout;
@@ -39,7 +40,7 @@ public class RequestMultipart {
     private Context mContext;
     private RequestCallback requestCallback;
 
-    RequestMultipart(String url, String method, String headerKey, String headerValue, String[] headerKeys, String[] headerValues, String key, String value, String[] keys, String[] values, String bodyKey, StringBody stringBody, String[] filePath){
+    RequestMultipart(String url, String method, String headerKey, String headerValue, String[] headerKeys, String[] headerValues, String key, String value, String[] keys, String[] values, String bodyKey, StringBody stringBody, String[] filePathKeys, String[] filePathValues){
         this.url = url;
         this.method = method;
         this.headerKey = headerKey;
@@ -52,7 +53,8 @@ public class RequestMultipart {
         this.values = values;
         this.bodyKey = bodyKey;
         this.stringBody = stringBody;
-        this.filePath = filePath;
+        this.filePathKeys = filePathKeys;
+        this.filePathValues = filePathValues;
     }
 
     void setTimeout(int readTimeout, int connectionTimeout) {
@@ -112,7 +114,7 @@ public class RequestMultipart {
                 }
 
                 if(method.toUpperCase().equals(Methods.POST())){
-                    response = serviceCall.initializeMultipart(url, headerKey, headerValue, headerKeys, headerValues, key, value, keys, values, bodyKey, stringBody, filePath);
+                    response = serviceCall.initializeMultipart(url, headerKey, headerValue, headerKeys, headerValues, key, value, keys, values, bodyKey, stringBody, filePathKeys, filePathValues);
                 }else {
                     response = new Response();
                     response.setResponseCode(-1);

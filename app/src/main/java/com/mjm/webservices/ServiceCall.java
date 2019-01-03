@@ -158,7 +158,7 @@ public class ServiceCall {
         return response;
     }
 
-    Response initializeMultipart(String URL, String headerKey, String headerValue, String[] headerKeys, String[] headerValues, String key, String value, String[] keys, String[] values, String bodyKey, StringBody stringBody, String[] filePath) throws IOException {
+    Response initializeMultipart(String URL, String headerKey, String headerValue, String[] headerKeys, String[] headerValues, String key, String value, String[] keys, String[] values, String bodyKey, StringBody stringBody, String[] filePathKeys, String[] filePathValues) throws IOException {
         initializeConnection(URL);
         setupMultipartProperties(Methods.POST());
         if(headerKey != null && headerValue != null) {
@@ -187,8 +187,8 @@ public class ServiceCall {
             entity = setFormBody(entity, bodyKey, stringBody);
         }
 
-        if(filePath != null){
-            entity = setFileBody(entity, filePath);
+        if(filePathKeys != null && filePathValues != null){
+            entity = setFileBody(entity, filePathKeys, filePathValues);
         }
 
         try {
@@ -206,10 +206,14 @@ public class ServiceCall {
         return entity;
     }
 
-    private AndroidMultiPartEntity setFileBody(AndroidMultiPartEntity entity, String[] filePathArr) throws FileNotFoundException{
-        for(String filePath: filePathArr) {
-            File sourceFile = new File(filePath);
-            entity.addPart("filePath", new FileBody(sourceFile));
+    private AndroidMultiPartEntity setFileBody(AndroidMultiPartEntity entity, String[] filePathKeys, String[] filePathValues) throws FileNotFoundException{
+        for(int i=0; i<filePathValues.length; i++) {
+            String filePathKey = filePathKeys[i];
+            String filePathValue = filePathValues[i];
+            if(filePathKey != null && filePathValue != null) {
+                File sourceFile = new File(filePathValue);
+                entity.addPart(filePathKey, new FileBody(sourceFile));
+            }
         }
         return entity;
     }

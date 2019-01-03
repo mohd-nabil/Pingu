@@ -19,74 +19,81 @@ public class RequestFile {
     private String[] values;
     private String bodyKey;
     private StringBody stringBody;
-    private String[] filePath;
+    private String[] filePathKeys;
+    private String[] filePathValues;
 
-    RequestFile(String url, String method, String[] filePath) {
+    RequestFile(String url, String method, String[] filePathKeys, String[] filePathValues) {
         this.url = url;
         this.method = method;
-        this.filePath = filePath;
+        this.filePathKeys = filePathKeys;
+        this.filePathValues = filePathValues;
     }
 
-    RequestFile(String url, String method, String key, String value, String[] filePath) {
+    RequestFile(String url, String method, String key, String value, String[] filePathKeys, String[] filePathValues) {
         this.url = url;
         this.method = method;
         this.key = key;
         this.value = value;
         this.headerKey = key;
         this.headerValue = value;
-        this.filePath = filePath;
+        this.filePathKeys = filePathKeys;
+        this.filePathValues = filePathValues;
     }
 
-    RequestFile(String url, String method, String[] keys, String[] values, String[] filePath) {
+    RequestFile(String url, String method, String[] keys, String[] values, String[] filePathKeys, String[] filePathValues) {
         this.url = url;
         this.method = method;
         this.keys = keys;
         this.values = values;
         this.headerKeys = keys;
         this.headerValues = values;
-        this.filePath = filePath;
+        this.filePathKeys = filePathKeys;
+        this.filePathValues = filePathValues;
     }
 
-    public RequestFile(String url, String method, String key, String value, String bodyKey, StringBody stringBody, String[] filePath) {
+    public RequestFile(String url, String method, String key, String value, String bodyKey, StringBody stringBody, String[] filePathKeys, String[] filePathValues) {
         this.url = url;
         this.method = method;
         this.headerKey = key;
         this.headerValue = value;
         this.bodyKey = bodyKey;
         this.stringBody = stringBody;
-        this.filePath = filePath;
+        this.filePathKeys = filePathKeys;
+        this.filePathValues = filePathValues;
     }
 
-    public RequestFile(String url, String method, String[] keys, String[] values, String bodyKey, StringBody stringBody, String[] filePath) {
+    public RequestFile(String url, String method, String[] keys, String[] values, String bodyKey, StringBody stringBody, String[] filePathKeys, String[] filePathValues) {
         this.url = url;
         this.method = method;
         this.headerKeys = keys;
         this.headerValues = values;
         this.bodyKey = bodyKey;
         this.stringBody = stringBody;
-        this.filePath = filePath;
+        this.filePathKeys = filePathKeys;
+        this.filePathValues = filePathValues;
     }
 
-    public RequestFile(String url, String method, String bodyKey, StringBody stringBody, String[] filePath) {
+    public RequestFile(String url, String method, String bodyKey, StringBody stringBody, String[] filePathKeys, String[] filePathValues) {
         this.url = url;
         this.method = method;
         this.bodyKey = bodyKey;
         this.stringBody = stringBody;
-        this.filePath = filePath;
+        this.filePathKeys = filePathKeys;
+        this.filePathValues = filePathValues;
     }
 
     public RequestMultipart request(){
-        return new RequestMultipart(url, method, headerKey, headerValue, headerKeys, headerValues, key, value, keys, values, bodyKey, stringBody, filePath);
+        return new RequestMultipart(url, method, headerKey, headerValue, headerKeys, headerValues, key, value, keys, values, bodyKey, stringBody, filePathKeys, filePathValues);
     }
 
     public RequestMultipart request(int readTimeout, int connectionTimeout){
-        RequestMultipart requestMultipart = new RequestMultipart(url, method, headerKey, headerValue, headerKeys, headerValues, key, value, keys, values, bodyKey, stringBody, filePath);
+        RequestMultipart requestMultipart = new RequestMultipart(url, method, headerKey, headerValue, headerKeys, headerValues, key, value, keys, values, bodyKey, stringBody, filePathKeys, filePathValues);
         requestMultipart.setTimeout(readTimeout, connectionTimeout);
         return requestMultipart;
     }
 
     public RequestMultipart request(int readTimeout, int connectionTimeout, String contentType){
-        RequestMultipart requestMultipart = new RequestMultipart(url, method,headerKey, headerValue, headerKeys, headerValues,  key, value, keys, values, bodyKey, stringBody, filePath);
+        RequestMultipart requestMultipart = new RequestMultipart(url, method,headerKey, headerValue, headerKeys, headerValues,  key, value, keys, values, bodyKey, stringBody, filePathKeys, filePathValues);
         requestMultipart.setTimeout(readTimeout, connectionTimeout, contentType);
         return requestMultipart;
     }

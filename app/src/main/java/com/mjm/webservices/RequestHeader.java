@@ -17,16 +17,16 @@ public class RequestHeader {
         this.value = value;
     }
 
-    public RequestFile file(String[] filePath){
-        return new RequestFile(url, method, filePath);
+    public RequestFile file(String[] filePathKeys, String[] filePathValues){
+        return new RequestFile(url, method, filePathKeys, filePathValues);
     }
 
-    public RequestFile file(String key, String value, String[] filePath){
-        return new RequestFile(url, method, key, value, filePath);
+    public RequestFile file(String key, String value, String[] filePathKeys, String[] filePathValues){
+        return new RequestFile(url, method, key, value, filePathKeys, filePathValues);
     }
 
-    public RequestFile file(String[] keys, String[] values, String[] filePath){
-        return new RequestFile(url, method, keys, values, filePath);
+    public RequestFile file(String[] keys, String[] values, String[] filePathKeys, String[] filePathValues){
+        return new RequestFile(url, method, keys, values, filePathKeys, filePathValues);
     }
 
     public RequestBody json(String jsonBody){
