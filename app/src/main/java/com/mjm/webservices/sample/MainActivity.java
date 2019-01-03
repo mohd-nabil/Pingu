@@ -8,10 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.mjm.webservices.Methods;
 import com.mjm.webservices.R;
 import com.mjm.webservices.RequestCallback;
 import com.mjm.webservices.Response;
 import com.mjm.webservices.Service;
+
+import org.apache.http.entity.mime.content.StringBody;
 
 import java.io.File;
 
@@ -54,6 +57,14 @@ public class MainActivity extends AppCompatActivity{
 
         URL = "http://192.168.15.223:3000/withMultipart";
         callWithMultipart(URL);
+
+
+//        Service.url("").method(Methods.POST()).file(null);
+//        Service.url("").method(Methods.POST()).file("", "", null);
+//        Service.url("").method(Methods.POST()).file(new String[]{}, null, null);
+//        Service.url("").method(Methods.POST()).file("", "", "", null, null);
+//        Service.url("").method(Methods.POST()).file(new String[]{}, null, "", null, null);
+//        Service.url("").method(Methods.POST()).file("", null, null);
     }
 
     private void callWithMultipart(String URL) {
@@ -63,7 +74,7 @@ public class MainActivity extends AppCompatActivity{
         String logPath = logFile.getPath();
         String demoPath = demoFile.getPath();
 
-        Service.url(URL).method("POST").file(new String[]{"token", "id", "name"}, new String[]{"sdad4454", "01", "anisha"}, new String[]{demoPath, logPath}).request().execute(mContext, new RequestCallback() {
+        Service.url(URL).method("POST").file(new String[]{"token", "id", "name"}, new String[]{"sdad4454", "01", "anisha"}, new String[]{"filePath", "filePath"}, new String[]{demoPath, logPath}).request().execute(mContext, new RequestCallback() {
             @Override
             public void onSuccess(Response response) {
                 Toast.makeText(mContext, response.getResponse(), Toast.LENGTH_SHORT).show();
