@@ -16,5 +16,5 @@ Add it in your root build.gradle at the end of repositories:
 Step 2. Add the dependency
 
 	dependencies {
-	        implementation 'com.github.nabil0:Pingu:Tag'
+	        implementation 'com.github.nabil0:Pingu:d98afeaf13'
 	}
