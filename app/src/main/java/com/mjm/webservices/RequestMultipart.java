@@ -6,8 +6,6 @@ import android.os.AsyncTask;
 
 import org.apache.http.entity.mime.content.StringBody;
 
-import java.io.File;
-
 /**
  * Created by nabilulaleem.md on 28-05-2018.
  */

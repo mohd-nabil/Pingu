@@ -8,13 +8,11 @@ android {
 //        applicationId "com.mjm.webservices"
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 2
-        versionName "2.0.3"
+        versionCode 3
+        versionName "2.0.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        generatedDensities = []
-
-        // Enabling multidex support.
+        // Enabling multi dex support.
         multiDexEnabled true
     }
     buildTypes {
@@ -38,7 +36,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    implementation 'com.squareup.okhttp3:okhttp:3.4.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
 
     //AndroidMultiPartEntity
     implementation group: 'org.apache.httpcomponents' , name: 'httpclient-android' , version: '4.3.5.1'
