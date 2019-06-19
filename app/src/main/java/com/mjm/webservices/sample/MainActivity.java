@@ -13,8 +13,7 @@ import com.mjm.webservices.R;
 import com.mjm.webservices.RequestCallback;
 import com.mjm.webservices.Response;
 import com.mjm.webservices.Service;
-
-import org.apache.http.entity.mime.content.StringBody;
+import com.mjm.webservices.StringBody;
 
 import java.io.File;
 
@@ -52,11 +51,11 @@ public class MainActivity extends AppCompatActivity{
 //        URL = "http://192.168.15.223:3000/withJsonBodyAndSingleKeyValue";
 //        callWithJsonBodyAndSingleKeyValue(URL);
 
-//        URL = "http://192.168.15.223:3000/withJsonBodyAndMultipleKeyValue";
-//        callWithJsonBodyAndMultipleKeyValue(URL);
+        URL = "http://192.168.15.223:3000/withJsonBodyAndMultipleKeyValue";
+        callWithJsonBodyAndMultipleKeyValue(URL);
 
-        URL = "http://192.168.15.223:3000/withMultipart";
-        callWithMultipart(URL);
+//        URL = "http://192.168.15.223:3000/withMultipart";
+//        callWithMultipart(URL);
 
 
 //        Service.url("").method(Methods.POST()).file(null);

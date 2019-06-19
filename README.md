@@ -44,6 +44,7 @@ private void callWithMultipart(String URL) {
 }
 
 private void checkOtherConnection(String URL) {
+
     Service.url(URL).method("POST").request().execute(mContext, ConnectivityManager.TYPE_BLUETOOTH, new RequestCallback() {
         @Override
         public void onSuccess(Response response) {
@@ -57,6 +58,7 @@ private void checkOtherConnection(String URL) {
 }
 
 private void checkMobileConnection(String URL) {
+
     Service.url(URL).method("POST").request().execute(mContext, ConnectivityManager.TYPE_MOBILE, new RequestCallback() {
         @Override
         public void onSuccess(Response response) {
@@ -70,6 +72,7 @@ private void checkMobileConnection(String URL) {
 }
 
 private void checkWifiConnection(String URL) {
+
     Service.url(URL).method("POST").request().execute(mContext, ConnectivityManager.TYPE_WIFI, new RequestCallback() {
         @Override
         public void onSuccess(Response response) {
@@ -83,7 +86,7 @@ private void checkWifiConnection(String URL) {
 }
 
 private void callOnlyURL(String URL) {
-//        Service.url(URL).method("GET").request().execute(mContext, new RequestCallback() {
+
     Service.url(URL).method("POST").request().execute(mContext, new RequestCallback() {
         @Override
         public void onSuccess(Response response) {
@@ -97,6 +100,7 @@ private void callOnlyURL(String URL) {
 }
 
 private void callSingleKeyValue(String URL) {
+
     Service.url(URL).method("GET").header("token", "12d2sd21").request().execute(mContext, new RequestCallback() {
         @Override
         public void onSuccess(Response response) {
@@ -110,6 +114,7 @@ private void callSingleKeyValue(String URL) {
 }
 
 private void callMultipleKeyValue(String URL) {
+
     String[] paramKeys = {"token", "id"};
     String[] paramValues = {"454adasdsd", "1"};
     Service.url(URL).method("GET").headers(paramKeys, paramValues).request().execute(mContext, new RequestCallback() {
@@ -125,6 +130,7 @@ private void callMultipleKeyValue(String URL) {
 }
 
 private void callWithJsonBody(String URL) {
+
     Service.url(URL).method("POST").json("{\"name\":\"Nabil\"}").request().execute(mContext, new RequestCallback() {
         @Override
         public void onSuccess(Response response) {
@@ -138,6 +144,7 @@ private void callWithJsonBody(String URL) {
 }
 
 private void callWithJsonBodyAndSingleKeyValue(String URL) {
+
     Service.url(URL).method("PUT").header("token", "ds454s5d4s").json("{\"name\":\"Nabil\"}").request().execute(mContext, new RequestCallback() {
         @Override
         public void onSuccess(Response response) {
@@ -153,6 +160,7 @@ private void callWithJsonBodyAndSingleKeyValue(String URL) {
 }
 
 private void callWithJsonBodyAndMultipleKeyValue(String URL) {
+
     String[] paramKeys = {"token", "id"};
     String[] paramValues = {"454adasdsd", "1"};
     Service.url(URL).method("DELETE").headers(paramKeys, paramValues).json("{\"name\":\"Nabil\"}").request().execute(mContext, new RequestCallback() {

@@ -3,8 +3,13 @@ package com.mjm.webservices;
 import android.util.Log;
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Headers;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -102,7 +107,17 @@ public class DeleteService {
     private Response getResponse() throws IOException {
         Request request = requestBuilder.build();
         okhttp3.Response response = client.newCall(request).execute();
-        return new Response(response.code(), response.message(), response.body().string(), response.headers());
+
+        ResponseHeader.Builder headers = new ResponseHeader.Builder();
+
+        Map<String, List<String>> entries = response.headers().toMultimap();
+        Set<String> set = entries.keySet();
+        for (Iterator<String> it = set.iterator(); it.hasNext(); ) {
+            String key = it.next();
+            String value = response.headers().get(key);
+            headers.add(key, value);
+        }
+        return new Response(response.code(), response.message(), response.body().string(), headers.build());
     }
 
     private void addHeader(String paramKey, String paramValue) {

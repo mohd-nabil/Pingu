@@ -10,10 +10,9 @@ public class Response {
     private int responseCode;
     private String responseMessage;
     private String response;
-    private Headers headers;
+    private ResponseHeader headers;
 
     public Response(){}
-
 
     public Response(int responseCode, String responseMessage, String response){
         this.responseCode = responseCode;
@@ -21,12 +20,20 @@ public class Response {
         this.response = response;
     }
 
-    public Response(int responseCode, String responseMessage, String response, Headers headers){
+    public Response(int responseCode, String responseMessage, String response, ResponseHeader headers){
         this.responseCode = responseCode;
         this.responseMessage = responseMessage;
         this.response = response;
         this.headers = headers;
     }
+
+//    public Response(int code, String message, String string, Headers headers) {
+//        this.responseCode = responseCode;
+//        this.responseMessage = responseMessage;
+//        this.response = response;
+//        headers.toMultimap();
+//        this.headers = headers;
+//    }
 
     public int getResponseCode() {
         return responseCode;
@@ -52,11 +59,12 @@ public class Response {
         this.response = response;
     }
 
-    public Headers getHeaders() {
+    public ResponseHeader getHeaders() {
         return headers;
     }
 
-    public void setHeaders(Headers headers) {
+    public void setHeaders(ResponseHeader headers) {
         this.headers = headers;
     }
+
 }

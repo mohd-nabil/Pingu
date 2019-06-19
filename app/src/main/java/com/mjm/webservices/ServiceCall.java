@@ -3,7 +3,6 @@ package com.mjm.webservices;
 import android.util.Log;
 
 import org.apache.http.entity.mime.FormBodyPart;
-import org.apache.http.entity.mime.content.ContentBody;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 
@@ -18,9 +17,6 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
-
-import okhttp3.FormBody;
-import okhttp3.Headers;
 
 public class ServiceCall {
 
@@ -280,7 +276,7 @@ public class ServiceCall {
         int responseCode = conn.getResponseCode();
         String responseMessage = conn.getResponseMessage();
         Log.d(TAG, "**REQUEST CODE**" + responseCode);
-        Headers.Builder headers = new Headers.Builder();
+        ResponseHeader.Builder headers = new ResponseHeader.Builder();
 
         String response = "";
         if (responseCode == HttpURLConnection.HTTP_OK) {
