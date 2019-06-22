@@ -8,12 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
-import com.mjm.webservices.Methods;
 import com.mjm.webservices.R;
 import com.mjm.webservices.RequestCallback;
 import com.mjm.webservices.Response;
 import com.mjm.webservices.Service;
-import com.mjm.webservices.StringBody;
 
 import java.io.File;
 

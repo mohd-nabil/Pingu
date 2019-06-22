@@ -8,8 +8,8 @@ android {
 //        applicationId "com.mjm.webservices"
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 3
-        versionName "2.0.4"
+        versionCode 4
+        versionName "2.1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         // Enabling multi dex support.
@@ -38,10 +38,13 @@ dependencies {
 
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
 
+    implementation files('libs/apache-httpcomponents-httpclient.jar')
+    implementation files('libs/httpmime-4.3.jar')
+    implementation files('libs/httpcore-4.2.3')
     //AndroidMultiPartEntity
-    implementation group: 'org.apache.httpcomponents' , name: 'httpclient-android' , version: '4.3.5.1'
-    implementation('org.apache.httpcomponents:httpmime:4.3') {
-        exclude module: "httpclient"
-    }
+//    implementation group: 'org.apache.httpcomponents' , name: 'httpclient-android' , version: '4.3.5.1'
+//    implementation('org.apache.httpcomponents:httpmime:4.3') {
+//        exclude module: "httpclient"
+//    }
 
 }
