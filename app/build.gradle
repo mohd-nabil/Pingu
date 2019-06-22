@@ -38,7 +38,7 @@ dependencies {
 
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
 
-    implementation files('libs/apache-httpcomponents-httpclient.jar')
+//    implementation files('libs/apache-httpcomponents-httpclient.jar')
     implementation files('libs/httpmime-4.3.jar')
     implementation files('libs/httpcore-4.2.3')
     //AndroidMultiPartEntity
