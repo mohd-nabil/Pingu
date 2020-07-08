@@ -1,8 +1,12 @@
 package com.mjm.webservices;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.FormBodyPart;
+import org.apache.http.entity.mime.content.ContentBody;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 
@@ -15,6 +19,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
@@ -222,7 +228,7 @@ public class ServiceCall {
 
     private static HttpURLConnection setParamsAndValues(HttpURLConnection conn, String paramsKey, String paramsValue){
         try {
-            Log.d(TAG, "**KEY**" + paramsKey + "=" + paramsValue);
+            Log.d(TAG, "**KEY**" + paramsKey + ":" + paramsValue);
             conn.setRequestProperty(paramsKey, paramsValue);
         }catch (Exception e){
             Log.d(TAG, ""+e);
@@ -232,7 +238,7 @@ public class ServiceCall {
     private static HttpURLConnection setParamsAndValues(HttpURLConnection conn, String[] paramsKeys, String[] paramsValues){
         for(int i=0; i<paramsKeys.length; i++){
             try {
-                Log.d(TAG, "**KEY**" + paramsKeys[i] + "=" + paramsValues[i]);
+                Log.d(TAG, "**KEY**" + paramsKeys[i] + ":" + paramsValues[i]);
                 conn.setRequestProperty(paramsKeys[i], paramsValues[i]);
             }catch (Exception e){
                 Log.d(TAG, ""+e);
@@ -242,9 +248,9 @@ public class ServiceCall {
     }
     private static AndroidMultiPartEntity setParamsAndValues(AndroidMultiPartEntity entity, String paramsKey, String paramsValue){
         try {
-            Log.d(TAG, "**KEY**" + paramsKey + "=" + paramsValue);
-            entity.addPart(paramsKey, new StringBody(paramsValue));
-        }catch (Exception e){
+            Log.d(TAG, "**KEY**" + paramsKey + ":" + paramsValue);
+            entity.addPart(paramsKey, new StringBody(paramsValue, ContentType.TEXT_PLAIN));
+        } catch (Exception e){
             Log.d(TAG, ""+e);
         }
         return entity;
@@ -252,7 +258,7 @@ public class ServiceCall {
     private static AndroidMultiPartEntity setParamsAndValues(AndroidMultiPartEntity entity, String[] paramsKeys, String[] paramsValues){
         for(int i=0; i<paramsKeys.length; i++){
             try {
-                Log.d(TAG, "**KEY**" + paramsKeys[i] + "=" + paramsValues[i]);
+                Log.d(TAG, "**KEY**" + paramsKeys[i] + ":" + paramsValues[i]);
                 entity.addPart(paramsKeys[i], new StringBody(paramsValues[i]));
             }catch (Exception e){
                 Log.d(TAG, ""+e);
@@ -261,7 +267,7 @@ public class ServiceCall {
         return entity;
     }
 
-    private Response getResponse(AndroidMultiPartEntity entity) throws IOException, FileNotFoundException {
+    private Response getResponse(AndroidMultiPartEntity entity) throws IOException {
         conn.setRequestProperty("Connection", "Keep-Alive");
         conn.addRequestProperty("Content-length", entity.getContentLength()+"");
         conn.addRequestProperty(entity.getContentType().getName(), entity.getContentType().getValue());
@@ -278,13 +284,13 @@ public class ServiceCall {
         Log.d(TAG, "**REQUEST CODE**" + responseCode);
         ResponseHeader.Builder headers = new ResponseHeader.Builder();
 
-        String response = "";
+        StringBuilder response = new StringBuilder();
         if (responseCode == HttpURLConnection.HTTP_OK) {
             for(Map.Entry<String, List<String>> entries : conn.getHeaderFields().entrySet()){
                 try {
-                    String values = "";
+                    StringBuilder values = new StringBuilder();
                     for (String value : entries.getValue()) {
-                        values += value + ",";
+                        values.append(value).append(",");
                     }
                     headers.add(entries.getKey(), values.substring(0, values.length()-1));
                 }catch (Exception e){}
@@ -293,14 +299,14 @@ public class ServiceCall {
             String line;
             BufferedReader br=new BufferedReader(new InputStreamReader(conn.getInputStream()));
             while ((line=br.readLine()) != null) {
-                response+=line;
+                response.append(line);
             }
         }else {
             try {
                 String line;
                 BufferedReader br = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
                 while ((line = br.readLine()) != null) {
-                    response += line;
+                    response.append(line);
                 }
             }catch (Exception e){
                 e.printStackTrace();
@@ -312,11 +318,11 @@ public class ServiceCall {
                 }else if(responseCode == 500){
                     message = INTERNAL_SERVER_ERROR;
                 }
-                response = message;
+                response = new StringBuilder(message);
             }
         }
         Log.d(TAG, "**RESPONSE**" + response);
         conn.connect();
-        return  new Response(responseCode, responseMessage, response, headers.build());
+        return  new Response(responseCode, responseMessage, response.toString(), headers.build());
     }
 }

@@ -29,24 +29,75 @@ public class RequestFile {
         this.filePathValues = filePathValues;
     }
 
-    RequestFile(String url, String method, String key, String value, String[] filePathKeys, String[] filePathValues) {
+    RequestFile(String url, String method, String headerKey, String headerValue, String[] filePathKeys, String[] filePathValues) {
         this.url = url;
         this.method = method;
-        this.key = key;
-        this.value = value;
-        this.headerKey = key;
-        this.headerValue = value;
+        this.headerKey = headerKey;
+        this.headerValue = headerValue;
         this.filePathKeys = filePathKeys;
         this.filePathValues = filePathValues;
     }
 
-    RequestFile(String url, String method, String[] keys, String[] values, String[] filePathKeys, String[] filePathValues) {
+    RequestFile(String url, String method, String[] headerKeys, String[] headerValues, String[] filePathKeys, String[] filePathValues) {
+        this.url = url;
+        this.method = method;
+        this.headerKeys = headerKeys;
+        this.headerValues = headerValues;
+        this.filePathKeys = filePathKeys;
+        this.filePathValues = filePathValues;
+    }
+
+    RequestFile(String url, String method, String headerKey, String headerValue, String key, String value, String[] filePathKeys, String[] filePathValues) {
+        this.url = url;
+        this.method = method;
+        this.key = key;
+        this.value = value;
+        this.headerKey = headerKey;
+        this.headerValue = headerValue;
+        this.filePathKeys = filePathKeys;
+        this.filePathValues = filePathValues;
+    }
+
+    RequestFile(String url, String method, String[] headerKeys, String[] headerValues, String key, String value, String[] filePathKeys, String[] filePathValues) {
+        this.url = url;
+        this.method = method;
+        this.key = key;
+        this.value = value;
+        this.headerKeys = headerKeys;
+        this.headerValues = headerValues;
+        this.filePathKeys = filePathKeys;
+        this.filePathValues = filePathValues;
+    }
+
+    RequestFile(String url, String method, String headerKey, String headerValue, String[] keys, String[] values, String[] filePathKeys, String[] filePathValues) {
         this.url = url;
         this.method = method;
         this.keys = keys;
         this.values = values;
-        this.headerKeys = keys;
-        this.headerValues = values;
+        this.headerKey = headerKey;
+        this.headerValue = headerValue;
+        this.filePathKeys = filePathKeys;
+        this.filePathValues = filePathValues;
+    }
+
+    RequestFile(String url, String method, String[] headerKeys, String[] headerValues, String[] keys, String[] values, String[] filePathKeys, String[] filePathValues) {
+        this.url = url;
+        this.method = method;
+        this.keys = keys;
+        this.values = values;
+        this.headerKeys = headerKeys;
+        this.headerValues = headerValues;
+        this.filePathKeys = filePathKeys;
+        this.filePathValues = filePathValues;
+    }
+
+    public RequestFile(String url, String method, String headerKey, String headerValue, String key, String value, String bodyKey, StringBody stringBody, String[] filePathKeys, String[] filePathValues) {
+        this.url = url;
+        this.method = method;
+        this.headerKey = headerKey;
+        this.headerValue = headerValue;
+        this.bodyKey = bodyKey;
+        this.stringBody = stringBody;
         this.filePathKeys = filePathKeys;
         this.filePathValues = filePathValues;
     }
@@ -54,8 +105,20 @@ public class RequestFile {
     public RequestFile(String url, String method, String key, String value, String bodyKey, StringBody stringBody, String[] filePathKeys, String[] filePathValues) {
         this.url = url;
         this.method = method;
-        this.headerKey = key;
-        this.headerValue = value;
+        this.key = key;
+        this.value = value;
+        this.bodyKey = bodyKey;
+        this.stringBody = stringBody;
+        this.filePathKeys = filePathKeys;
+        this.filePathValues = filePathValues;
+    }
+
+
+    public RequestFile(String url, String method, String[] headerKeys, String[] headerValues, String[] keys, String[] values, String bodyKey, StringBody stringBody, String[] filePathKeys, String[] filePathValues) {
+        this.url = url;
+        this.method = method;
+        this.headerKeys = headerKeys;
+        this.headerValues = headerValues;
         this.bodyKey = bodyKey;
         this.stringBody = stringBody;
         this.filePathKeys = filePathKeys;
@@ -65,14 +128,13 @@ public class RequestFile {
     public RequestFile(String url, String method, String[] keys, String[] values, String bodyKey, StringBody stringBody, String[] filePathKeys, String[] filePathValues) {
         this.url = url;
         this.method = method;
-        this.headerKeys = keys;
-        this.headerValues = values;
+        this.keys = keys;
+        this.values = values;
         this.bodyKey = bodyKey;
         this.stringBody = stringBody;
         this.filePathKeys = filePathKeys;
         this.filePathValues = filePathValues;
     }
-
     public RequestFile(String url, String method, String bodyKey, StringBody stringBody, String[] filePathKeys, String[] filePathValues) {
         this.url = url;
         this.method = method;

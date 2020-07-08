@@ -5,13 +5,22 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.mjm.webservices.Methods;
 import com.mjm.webservices.R;
 import com.mjm.webservices.RequestCallback;
 import com.mjm.webservices.Response;
 import com.mjm.webservices.Service;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 
@@ -22,13 +31,23 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        LinearLayout linearLayout = new LinearLayout(this);
+        Button button = new Button(this);
+        button.setText("Call");
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callService(v);
+            }
+        });
+        linearLayout.addView(button);
+        setContentView(linearLayout);
+
         mContext = this;
 
     }
 
     public void callService(View view) {
-        String URL = "";
 
 //        checkMobileConnection(URL);
 //        checkWifiConnection(URL);
@@ -49,8 +68,8 @@ public class MainActivity extends AppCompatActivity{
 //        URL = "http://192.168.15.223:3000/withJsonBodyAndSingleKeyValue";
 //        callWithJsonBodyAndSingleKeyValue(URL);
 
-        URL = "http://192.168.15.223:3000/withJsonBodyAndMultipleKeyValue";
-        callWithJsonBodyAndMultipleKeyValue(URL);
+        String URL = "http://192.168.15.223:3000/withJsonBodyAndMultipleKeyValue";
+//        callWithJsonBodyAndMultipleKeyValue(URL);
 
 //        URL = "http://192.168.15.223:3000/withMultipart";
 //        callWithMultipart(URL);
