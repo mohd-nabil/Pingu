@@ -18,7 +18,7 @@ allprojects {
 Step 2. Add the dependency
 
 	dependencies {
-        implementation 'com.github.mohd-nabil:Pingu:2.0.4'
+        implementation 'com.github.mohd-nabil:Pingu:2.1.1'
 	}
 
 --Sample to call multiple different types of service--
