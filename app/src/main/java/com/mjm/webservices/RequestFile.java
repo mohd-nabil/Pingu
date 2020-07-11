@@ -29,20 +29,20 @@ public class RequestFile {
         this.filePathValues = filePathValues;
     }
 
-    RequestFile(String url, String method, String headerKey, String headerValue, String[] filePathKeys, String[] filePathValues) {
+    RequestFile(String url, String method, String key, String value, String[] filePathKeys, String[] filePathValues) {
         this.url = url;
         this.method = method;
-        this.headerKey = headerKey;
-        this.headerValue = headerValue;
+        this.key = key;
+        this.value = value;
         this.filePathKeys = filePathKeys;
         this.filePathValues = filePathValues;
     }
 
-    RequestFile(String url, String method, String[] headerKeys, String[] headerValues, String[] filePathKeys, String[] filePathValues) {
+    RequestFile(String url, String method, String[] keys, String[] values, String[] filePathKeys, String[] filePathValues) {
         this.url = url;
         this.method = method;
-        this.headerKeys = headerKeys;
-        this.headerValues = headerValues;
+        this.keys = keys;
+        this.values = values;
         this.filePathKeys = filePathKeys;
         this.filePathValues = filePathValues;
     }
