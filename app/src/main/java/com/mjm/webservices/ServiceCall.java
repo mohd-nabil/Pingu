@@ -43,6 +43,7 @@ public class ServiceCall {
     private static int readTimeout = 20000;
     private static int connectTimeout = 25000;
     private static String contentType = "application/json; charset=UTF-8";
+    private String authToken;
 
     private static HttpURLConnection conn;
 
@@ -63,12 +64,18 @@ public class ServiceCall {
         ServiceCall.contentType = contentType;
     }
 
+    public void authToken(String authToken){
+        this.authToken = authToken;
+    }
     private void initializeConnection(String URL) throws IOException {
         Log.d(TAG, URL);
         java.net.URL url = new URL(URL);
         conn = (HttpURLConnection) url.openConnection();
         conn.setReadTimeout(readTimeout);
         conn.setConnectTimeout(connectTimeout);
+        if(authToken != null){
+            conn.setRequestProperty("Authorization", authToken);
+        }
     }
 
     private void setupGetProperties() throws ProtocolException {
@@ -156,6 +163,7 @@ public class ServiceCall {
 //            setJSONValue(jsonBody);
 //        }
         DeleteService deleteService = new DeleteService(readTimeout, connectTimeout, contentType);
+        deleteService.authToken(authToken);
         Response response = deleteService.initializeDeleteClient(URL, jsonBody, paramsKey, paramsValue, paramsKeys, paramsValues);
         return response;
     }

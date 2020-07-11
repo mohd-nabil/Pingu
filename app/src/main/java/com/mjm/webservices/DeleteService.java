@@ -27,6 +27,7 @@ public class DeleteService {
 
     private OkHttpClient client;
     private Request.Builder requestBuilder;
+    private String authToken;
 
     public DeleteService(){}
 
@@ -45,9 +46,17 @@ public class DeleteService {
         DeleteService.contentType = contentType;
     }
 
+
+    public void authToken(String authToken) {
+        this.authToken = authToken;
+    }
+
     private void initialiseConnection(String url){
         client = new OkHttpClient.Builder().connectTimeout(connectTimeout, TimeUnit.MILLISECONDS).readTimeout(readTimeout, TimeUnit.SECONDS).build();
         requestBuilder = new Request.Builder().url(url);
+        if(authToken != null){
+            requestBuilder.addHeader("Authorization", authToken);
+        }
     }
 
     public Response initializeGetClient(String url, String paramsKey, String paramsValue, String[] paramsKeys, String[] paramsValues) throws IOException {
@@ -137,4 +146,5 @@ public class DeleteService {
         RequestBody body = RequestBody.create(MediaType.parse(contentType), json);
         return body;
     }
+
 }

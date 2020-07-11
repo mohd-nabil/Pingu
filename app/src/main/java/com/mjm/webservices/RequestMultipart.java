@@ -36,6 +36,7 @@ public class RequestMultipart {
     private String contentType;
 
     private Context mContext;
+    private String authToken;
     private RequestCallback requestCallback;
 
     RequestMultipart(String url, String method, String headerKey, String headerValue, String[] headerKeys, String[] headerValues, String key, String value, String[] keys, String[] values, String bodyKey, StringBody stringBody, String[] filePathKeys, String[] filePathValues){
@@ -68,6 +69,17 @@ public class RequestMultipart {
 
     public void execute(Context context, RequestCallback requestCallback){
         this.mContext = context;
+        this.requestCallback = requestCallback;
+        if(MobileConnectivity.checkInternet(mContext)) {
+            new ServiceAsync().execute();
+        }else{
+            requestCallback.onError(new Response(-1, INTERNET_CONNECTION, INTERNET_CONNECTION));
+        }
+    }
+
+    public void execute(Context context, String authToken, RequestCallback requestCallback){
+        this.mContext = context;
+        this.authToken = authToken;
         this.requestCallback = requestCallback;
         if(MobileConnectivity.checkInternet(mContext)) {
             new ServiceAsync().execute();
@@ -109,6 +121,10 @@ public class RequestMultipart {
                     serviceCall = new ServiceCall(readTimeout, connectionTimeout);
                 }else if(contentType != null){
                     serviceCall = new ServiceCall(contentType);
+                }
+
+                if(authToken != null){
+                    serviceCall.authToken(authToken);
                 }
 
                 if(method.toUpperCase().equals(Methods.POST())){
