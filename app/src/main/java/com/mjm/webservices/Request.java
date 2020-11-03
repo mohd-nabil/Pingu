@@ -27,6 +27,7 @@ public class Request {
     private int readTimeout;
     private int connectionTimeout;
     private String contentType;
+    private String authToken;
 
 
     Request(String url, String method, String key, String value, String[] keys, String[] values, String jsonBody) {
@@ -79,6 +80,17 @@ public class Request {
         }
     }
 
+    public void execute(Context context, String authToken, RequestCallback requestCallback){
+        this.mContext = context;
+        this.authToken = authToken;
+        this.requestCallback = requestCallback;
+        if(MobileConnectivity.checkInternet(mContext)) {
+            new ServiceAsync().execute();
+        }else{
+            requestCallback.onError(new Response(-1, INTERNET_CONNECTION, INTERNET_CONNECTION));
+        }
+    }
+
      public void execute(Context context, int connectivityType, RequestCallback requestCallback){
         this.mContext = context;
         this.requestCallback = requestCallback;
@@ -114,7 +126,9 @@ public class Request {
                 }else if(contentType != null){
                     serviceCall = new ServiceCall(contentType);
                 }
-
+                if(authToken != null){
+                    serviceCall.authToken(authToken);
+                }
                 if(method.toUpperCase().equals(Methods.GET())){
                     response = serviceCall.initializeGetClient(url, key, value, keys, values);
                 }else if(method.toUpperCase().equals(Methods.POST())){
